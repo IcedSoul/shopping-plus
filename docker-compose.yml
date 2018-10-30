@@ -1,0 +1,122 @@
+version: '3'
+services:
+  # MySql数据库
+  shopping-login-mysql:
+    image: mysql:5.6
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: user
+    networks:
+      - gxf-network
+
+  shopping-order-mysql:
+    image: mysql:5.6
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: order
+    networks:
+      - gxf-network
+
+  shopping-payment-mysql:
+    image: mysql:5.6
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: pay_record
+    networks:
+      - gxf-network
+
+  shopping-products-mysql:
+    image: mysql:5.6
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: products
+    networks:
+      - gxf-network
+
+  shopping-shoppingcar-mysql:
+    image: mysql:5.6
+    ports:
+      - "3310:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shoppingcar
+    networks:
+      - gxf-network
+#  mysql:
+#    image: mysql:5.6
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: shopping
+#      MYSQL_ROOT_HOST: '%'
+#    restart: always
+#    networks:
+#      - gxf-network
+
+  shopping-login-service:
+    build: login-service
+    image: shopping/login-service
+    restart: always
+    depends_on:
+      - shopping-login-mysql
+    ports:
+      - 19691:19691
+    networks:
+      - gxf-network
+
+  shopping-order-service:
+    build: order-service
+    image: shopping/order-service
+    restart: always
+    depends_on:
+      - shopping-order-mysql
+    ports:
+      - 19692:19692
+    networks:
+      - gxf-network
+
+  shopping-payment-service:
+    build: payment-service
+    image: shopping/payment-service
+    restart: always
+    depends_on:
+      - shopping-payment-mysql
+    ports:
+      - 19693:19693
+    networks:
+      - gxf-network
+
+  shopping-products-service:
+    build: products-service
+    image: shopping/products-service
+    restart: always
+    depends_on:
+      - shopping-products-mysql
+    ports:
+      - 19694:19694
+    networks:
+      - gxf-network
+
+  shopping-shoppingcar-service:
+    build: shoppingcar-service
+    image: shopping/shoppingcar-service
+    restart: always
+    depends_on:
+      - shopping-shoppingcar-mysql
+    ports:
+      - 19695:19695
+    networks:
+      - gxf-network
+
+networks:
+    gxf-network:
+      driver: bridge

@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://shopping-products-mysql:3306/products?characterEncoding=utf8&useSSL=false
+#    url: jdbc:mysql://mysql:3306/shopping?characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  application:
+    name: products-service
+server:
+  port: 19694
