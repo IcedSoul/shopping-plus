@@ -12,6 +12,7 @@
   <modules>
     <module>src/common-service</module>
     <module>src/user-service</module>
+    <module>src/product-service</module>
   </modules>
 
 </project>
