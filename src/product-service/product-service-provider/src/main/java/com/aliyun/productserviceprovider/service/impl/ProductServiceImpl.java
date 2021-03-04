@@ -11,7 +11,6 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,7 +23,6 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @DubboService(version = "0.0.1")
-//@Service
 public class ProductServiceImpl implements ProductService, ProductServiceApi {
 
     @Resource

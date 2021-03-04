@@ -34,11 +34,10 @@ public class ProductController {
      */
     @ApiOperation(value = "Add product", notes = "添加商品（特殊权限）", response = Response.class)
     @PostMapping(value = "/product")
-
     public Response<ProductDto> addProduct(@RequestParam("name") String name, @RequestParam("description") String description,
                                @RequestParam("tags") String tags, @RequestParam("price") Double price,
-                               @RequestParam("type") Integer type){
-        return productService.addProduct(new ProductDto(name, description, tags, price, type));
+                               @RequestParam("type") Integer type, @RequestParam("img") String img){
+        return productService.addProduct(new ProductDto(name, description, tags, price, type, img));
     }
 
     @ApiOperation(value = "Get product by productId", notes = "根据商品ID获取商品", response = Response.class)

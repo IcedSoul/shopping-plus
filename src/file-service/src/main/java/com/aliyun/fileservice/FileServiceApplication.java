@@ -1,16 +1,17 @@
-package com.aliyun.productserviceprovider;
+package com.aliyun.fileservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author xiaofeng
- * @date 2021/3/1
+ * @date 2021/3/4
+ *
  */
 @SpringBootApplication
-public class ProductServiceProviderApplication {
+public class FileServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ProductServiceProviderApplication.class, args);
+        SpringApplication.run(FileServiceApplication.class, args);
     }
 
 }

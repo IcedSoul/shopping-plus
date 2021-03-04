@@ -12,8 +12,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: user
-#    volumes:
-#      - ../../user-mysql/data:/var/lib/mysql
     networks:
       - shopping-plus-network
 
@@ -29,8 +27,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: product
-    #    volumes:
-    #      - ../../user-mysql/data:/var/lib/mysql
     networks:
       - shopping-plus-network
 
@@ -45,13 +41,33 @@ services:
     networks:
       - shopping-plus-network
 
-#  zk-center:
-#    image: zookeeper
-#    restart: always
-#    ports:
-#      - 2181:2181
-#    networks:
-#      - withme-network
+  product-service:
+    build: ../../src/product-service
+    image: icedsoul/shopping-plus-product-service
+    restart: always
+    depends_on:
+      - product-mysql
+    ports:
+      - 21004:8081
+    networks:
+      - shopping-plus-network
+
+  file-service:
+    build: ../../src/file-service
+    image: icedsoul/shopping-plus-file-service
+    restart: always
+    ports:
+      - 21005:8081
+    networks:
+      - shopping-plus-network
+
+  zk-center:
+    image: zookeeper
+    restart: always
+    ports:
+      - 2181:2181
+    networks:
+      - shopping-plus-network
 
   frontend:
     build: ../../src/frontend

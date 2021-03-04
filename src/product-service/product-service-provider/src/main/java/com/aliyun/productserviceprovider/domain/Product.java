@@ -42,12 +42,17 @@ public class Product {
     @Column(nullable = false)
     private Integer type;
 
-    public Product(String name, String description, String tags, Double price, Integer type) {
+    @Column(nullable = false)
+    private String img;
+
+
+    public Product(String name, String description, String tags, Double price, Integer type, String img) {
         this.name = name;
         this.description = description;
         this.tags = tags;
         this.price = price;
         this.type = type;
+        this.img = img;
     }
 
     public Product(ProductDto productDto){
@@ -56,10 +61,11 @@ public class Product {
         this.tags = productDto.getTags();
         this.price = productDto.getPrice();
         this.type = productDto.getType();
+        this.img = productDto.getImg();
     }
 
     public ProductDto toDto(){
         return new ProductDto(this.productId, this.name, this.description,
-                this.tags, this.price, this.type);
+                this.tags, this.price, this.type, this.img);
     }
 }

@@ -1,6 +1,6 @@
 let loading = layer.load(0);
 
-let productType = new Array;
+let productType = [];
 productType[1] = "Clothes";
 productType[2] = "Electronics";
 productType[3] = "Books & Business";
@@ -14,7 +14,7 @@ listProducts();
 
 function listProducts() {
     let allProduct = getAllProducts();
-    let mark = new Array;
+    let mark = [];
     mark[1] = 0;
     mark[2] = 0;
     mark[3] = 0;
@@ -22,21 +22,21 @@ function listProducts() {
     mark[5] = 0;
     mark[6] = 0;
     mark[7] = 0;
-    for(let i=0;i<allProduct.length;i++){
+    for(let i=0; i<allProduct.length; i++){
         let html = "";
-        let imgURL = "./img/"+allProduct[i].id+".jpg";
+        let imgURL = "img/"+allProduct[i].img;
         html += '<div class="col-sm-4 col-md-4" >'+
             '<div class="boxes pointer" onclick="productDetail('+allProduct[i].id+')">'+
             '<div class="big bigimg">'+
             '<img src="'+imgURL+'">'+
             '</div>'+
-            '<p class="product-name">'+allProduct[i].name+'</p>'+
-            '<p class="product-price">¥'+allProduct[i].price+'</p>'+
+            '<p class="product-name">' + allProduct[i].name + '</p>'+
+            '<p class="product-price">¥' + allProduct[i].price + '</p>'+
             '</div>'+
             '</div>';
-        let id = "productArea"+allProduct[i].type;
+        let id = "productArea" + allProduct[i].type;
         let productArea = document.getElementById(id);
-        if(mark[allProduct[i].type] == 0){
+        if(mark[allProduct[i].type] === 0){
             html ='<hr/><h1>'+productType[allProduct[i].type]+'</h1><hr/>'+html;
             mark[allProduct[i].type] = 1;
         }
@@ -46,49 +46,24 @@ function listProducts() {
 }
 function getAllProducts() {
     let allProducts = null;
-    let nothing = {};
     $.ajax({
         async : false, //设置同步
-        type : 'POST',
-        url : './getAllProducts',
-        data : nothing,
+        type : 'GET',
+        url : 'v1/product?page=' + 1+ '&number' + 100,
         dataType : 'json',
         success : function(result) {
-            if (result!=null) {
-                allProducts = result.allProducts;
+            if (result.status === 1) {
+                allProducts = result.content;
             }
             else{
-                layer.alert('查询错误');
+                layer.alert(result.message);
             }
         },
-        error : function(resoult) {
-            layer.alert('查询错误');
+        error : function(result) {
+            layer.alert('Server Error' + result);
         }
     });
-    //划重点划重点，这里的eval方法不同于prase方法，外面加括号
+    //划重点划重点，这里的eval方法不同于parse方法，外面加括号
     allProducts = eval("("+allProducts+")");
     return allProducts;
-}
-
-function productDetail(id) {
-    let product = {};
-    let jumpResult = '';
-    product.id = id;
-    $.ajax({
-        async : false, //设置同步
-        type : 'POST',
-        url : './productDetail',
-        data : product,
-        dataType : 'json',
-        success : function(result) {
-            jumpResult = result.result;
-        },
-        error : function(resoult) {
-            layer.alert('查询错误');
-        }
-    });
-
-    if(jumpResult == "success"){
-        window.location.href = "./product_detail";
-    }
 }

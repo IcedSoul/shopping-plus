@@ -6,14 +6,20 @@
 
   <name>shopping-plus</name>
   <groupId>com.aliyun</groupId>
-  <artifactId>shoping-plus</artifactId>
+  <artifactId>shopping-plus</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+
+  <properties>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+  </properties>
 
   <modules>
     <module>src/common-service</module>
     <module>src/user-service</module>
     <module>src/product-service</module>
     <module>src/auth-service</module>
+    <module>src/file-service</module>
   </modules>
 
 </project>

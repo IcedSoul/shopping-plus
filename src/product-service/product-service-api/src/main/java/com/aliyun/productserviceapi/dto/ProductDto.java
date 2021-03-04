@@ -18,12 +18,14 @@ public class ProductDto {
     private String tags;
     private Double price;
     private Integer type;
+    private String img;
 
-    public ProductDto(String name, String description, String tags, Double price, Integer type) {
+    public ProductDto(String name, String description, String tags, Double price, Integer type, String img) {
         this.name = name;
         this.description = description;
         this.tags = tags;
         this.price = price;
         this.type = type;
+        this.img = img;
     }
 }
