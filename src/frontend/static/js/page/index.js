@@ -24,7 +24,7 @@ function listProducts() {
     mark[7] = 0;
     for(let i=0; i<allProduct.length; i++){
         let html = "";
-        let imgURL = "img/"+allProduct[i].img;
+        let imgURL = "v1/image/"+allProduct[i].img;
         html += '<div class="col-sm-4 col-md-4" >'+
             '<div class="boxes pointer" onclick="productDetail('+allProduct[i].id+')">'+
             '<div class="big bigimg">'+
@@ -44,12 +44,13 @@ function listProducts() {
     }
     layer.close(loading);
 }
+
 function getAllProducts() {
     let allProducts = null;
     $.ajax({
         async : false, //设置同步
         type : 'GET',
-        url : 'v1/product?page=' + 1+ '&number' + 100,
+        url : '/v1/product/' + 1 + '/' + 100,
         dataType : 'json',
         success : function(result) {
             if (result.status === 1) {
@@ -59,11 +60,9 @@ function getAllProducts() {
                 layer.alert(result.message);
             }
         },
-        error : function(result) {
-            layer.alert('Server Error' + result);
+        error : function() {
+            layer.alert('Server Error');
         }
     });
-    //划重点划重点，这里的eval方法不同于parse方法，外面加括号
-    allProducts = eval("("+allProducts+")");
     return allProducts;
 }

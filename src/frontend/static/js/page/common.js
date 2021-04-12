@@ -1,2 +1,6 @@
-$(".header").load("html/template/header.html")
-$(".footer").load("html/template/footer.html")
+$(".header").load("./template/header.html")
+$(".footer").load("./template/footer.html")
+
+function getUserInfo(){
+    return null;
+}

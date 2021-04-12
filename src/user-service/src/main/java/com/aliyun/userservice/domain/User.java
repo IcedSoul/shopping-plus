@@ -1,6 +1,5 @@
 package com.aliyun.userservice.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -25,7 +24,7 @@ public class User {
     @Id
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
     @GeneratedValue(generator = "idGenerator")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 64)
     private String userId;
 
     @Column(unique = true, length = 20)
@@ -43,9 +42,10 @@ public class User {
     @Column(length = 11)
     private String phoneNumber;
 
-    private Timestamp birthday;
+    @Column(length = 20)
+    private String birthday;
 
-    public User(String username, String email, String nickname, String password, String phoneNumber, Timestamp birthday) {
+    public User(String username, String email, String nickname, String password, String phoneNumber, String birthday) {
         this.username = username;
         this.email = email;
         this.nickname = nickname;

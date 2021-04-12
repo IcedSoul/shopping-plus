@@ -15,6 +15,11 @@ services:
     networks:
       - shopping-plus-network
 
+  auth-redis:
+    image: redis
+    ports:
+      - 6379:6379
+
   product-mysql:
     image: mysql:5.6
     ports:
@@ -52,9 +57,17 @@ services:
     networks:
       - shopping-plus-network
 
-  file-service:
-    build: ../../src/file-service
-    image: icedsoul/shopping-plus-file-service
+#  file-service:
+#    build: ../../src/file-service
+#    image: icedsoul/shopping-plus-file-service
+#    restart: always
+#    ports:
+#      - 21005:8081
+#    networks:
+#      - shopping-plus-network
+  image-service:
+    build: ../../src/image-service
+    image: icedsoul/shopping-plus-image-service
     restart: always
     ports:
       - 21005:8081
@@ -77,6 +90,8 @@ services:
       - 80:8081
     networks:
       - shopping-plus-network
+
+
 
 networks:
   shopping-plus-network:

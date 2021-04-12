@@ -25,7 +25,7 @@ public class UserController {
     @PostMapping(value = "/user")
     public Response<User> addMessage(@RequestParam("username") String username, @RequestParam("email") String email,
                                @RequestParam("nickname") String nickname, @RequestParam("password") String password,
-                               @RequestParam("phoneNumber") String phoneNumber, @RequestParam("birthday")Timestamp birthday) {
+                               @RequestParam("phoneNumber") String phoneNumber, @RequestParam("birthday")String birthday) {
         return userService.addUser(new User(username, email, nickname, password, phoneNumber, birthday));
     }
 
